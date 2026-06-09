@@ -1,8 +1,6 @@
 import entities.User;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Main {
 	public static void main(String[] args) {
@@ -10,7 +8,13 @@ public class Main {
 		User giovanni = new User("Giovanni", "Storti");
 		User giacomo = new User("Giacomo", "Poretti");
 
-		ArrayList<User> usersList = new ArrayList<>();
+		List<User> usersList = new LinkedList<>(); // ✅ questa tecnica di dichiarare List a sx dell'uguale (invece di LinkedList o ArrayList)
+		// 	mi consente in futuro di poter agilmente sostituire una LinkedList con un ArrayList (o viceversa) in maniera molto semplice. Utilizzo
+		// questa tecnica quando so già con anticipo che mi basteranno i metodi in comune tra AL e LL
+
+		// LinkedList<User> usersList = new LinkedList<>();  // Se invece so per certo che avrò bisogno di metodi che solo le LinkedList hanno, allora
+		// non potrò usare questa tecnica
+		// usersList.poll(); // .poll() è un metodo esclusivo delle LinkedList (non ce l'hanno le ArrayList)
 
 		// *************************************** ADD *******************************
 		System.out.println("La lista ha: " + usersList.size() + " elementi");
@@ -109,6 +113,50 @@ public class Main {
 		usersList.clear();
 		System.out.println("La lista è vuota? " + usersList.isEmpty());
 		System.out.println("La lista ha " + usersList.size() + " elementi");
+
+		// *************************************** COLLECTIONS & TIPI PRIMITIVI *********************************
+		// ArrayList<int> interi = new ArrayList<>(); // Non posso creare collections con tipi primitivi
+		ArrayList<Integer> interi = new ArrayList<>();
+		// Ogni tipo primitivo ha una sua classe corrispondente chiamate WRAPPER CLASSES
+		// int -> Integer
+		// double -> Double
+		// long -> Long
+		// boolean -> Boolean
+		interi.add(1);
+		interi.add(2);
+		System.out.println(interi);
+
+
+		// *************************************** SET *********************************
+		// I SET sono degli insiemi di dati in cui NON SONO AMMESSI DUPLICATI
+		// Questa caratteristica nasconde un costo computazionale importante. Ogniqualvolta useremo il metodo per aggiungere elementi
+		// esso dietro le quinte dovrà andare a controllare ELEMENTO PER ELEMENTO se il nuovo elemento è già presente. Se abbiamo tanti
+		// elementi, il costo diventa elevato
+
+		HashSet<User> usersSet = new HashSet<>();
+		// HashSet è il SET più comune ma non garantisce di mantenere l'ordinamento dei dati in base all'inserimento ma è rapido
+		// LinkedHashSet è un po' più lento di sopra ma mantiene l'ordinamento dei dati in base all'inserimento
+		// TreeSet è molto più lento degli altri perché oltre a non ammettere duplicati, ad ogni aggiunta ri-ordina tutti gli elementi
+		// in base a un criterio tipo numerico/alfabetico/custom
+
+		// Non è che sia vietato aggiungere 2 volte lo stesso elemento, il metodo mi torna un booleano
+		// che mi dirà se è riuscito ad aggiungere o meno l'elemento
+		System.out.println(usersSet.add(aldo)); // TRUE
+		System.out.println(usersSet.add(giovanni)); // TRUE
+		System.out.println(usersSet.add(giacomo)); // TRUE
+		System.out.println(usersSet.add(aldo)); // FALSE
+
+		System.out.println(usersSet);
+
+		TreeSet<String> alphabet = new TreeSet<>();
+
+		alphabet.add("z");
+		alphabet.add("c");
+		alphabet.add("e");
+		alphabet.add("a");
+		alphabet.add("w");
+
+		System.out.println(alphabet);
 
 
 	}
