@@ -158,6 +158,47 @@ public class Main {
 
 		System.out.println(alphabet);
 
+		// **************************************************** MAP **************************************************
+		HashMap<String, String> dictionary = new HashMap<>();
+
+		HashMap<Integer, User> usersMap = new HashMap<>();
+
+		// ************************************************ AGGIUNTA ELEMENTI ****************************************
+		dictionary.put("Albero", "Definizione di albero");
+		dictionary.put("Casa", "Definizione di casa");
+		dictionary.put("Pranzo", "Definizione di pranzo");
+
+		System.out.println(dictionary);
+
+		usersMap.put(123212, aldo);
+		usersMap.put(232323, giovanni);
+		usersMap.put(232323, giacomo); // Se specifico una chiave già esistente mi rimpiazza il precedente valore
+
+		System.out.println(usersMap);
+
+		// ************************************************ LETTURA ELEMENTI ****************************************
+		String treeDefinition = dictionary.get("Alberoooo"); // N.B. Torna NULL se non trova la chiave
+		if (treeDefinition != null) System.out.println(treeDefinition.toUpperCase());
+
+		// ************************************************ RIMOZIONE ELEMENTI ****************************************
+		dictionary.remove("Casa");
+
+		System.out.println(dictionary);
+
+		// *********************************************** ITERARE MAPS ************************************************
+		// 1. Ottengo l'elenco delle chiavi
+		// 2. Itero quell'elenco per accedere anche ad ogni elemento
+
+		Set<String> setChiavi = dictionary.keySet();
+
+		for (String chiave : setChiavi) {
+			System.out.println("CHIAVE: " + chiave);
+			System.out.println("VALORE: " + dictionary.get(chiave));
+		}
+
+		// ********************************************** VALUES ********************************************************
+		Collection<String> values = dictionary.values();
+		System.out.println(values);
 
 	}
 }
